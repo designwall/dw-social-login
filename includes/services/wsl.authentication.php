@@ -335,9 +335,14 @@ function wsl_process_login_end()
 		// if no associated user were found in wslusersprofiles, create new WordPress user
 		if( ! $wordpress_user_id )
 		{
-			$user_id = wsl_process_login_create_wp_user( $provider, $hybridauth_user_profile, $requested_user_login, $requested_user_email );
-
-			$is_new_user = true;
+			$user = get_user_by( 'email', $requested_user_email );
+			if ( is_object( $user ) ) {
+				$user_id = $user->id;
+				$is_new_user = false;
+			} else {
+				$user_id = wsl_process_login_create_wp_user( $provider, $hybridauth_user_profile, $requested_user_login, $requested_user_email );
+				$is_new_user = true;
+			}
 		}else{
 			$user_id = $wordpress_user_id;
 			$is_new_user = false;
