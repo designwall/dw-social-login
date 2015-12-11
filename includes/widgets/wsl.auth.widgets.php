@@ -227,7 +227,7 @@ function wsl_render_auth_widget( $args = array() )
 ?>
 
 		<a rel="nofollow" href="<?php echo $authenticate_url; ?>" title="<?php echo sprintf( _wsl__("Connect with %s", 'wordpress-social-login'), $provider_name ) ?>" class="wp-social-login-provider wp-social-login-provider-<?php echo strtolower( $provider_id ); ?>" data-provider="<?php echo $provider_id ?>">
-			<?php if( $social_icon_set == 'none' ){ echo apply_filters( 'wsl_render_auth_widget_alter_provider_name', $provider_name ); } else { ?><img alt="<?php echo $provider_name ?>" title="<?php echo sprintf( _wsl__("Connect with %s", 'wordpress-social-login'), $provider_name ) ?>" src="<?php echo $assets_base_url . strtolower( $provider_id ) . '.png' ?>" /><?php } ?>
+			<?php if( $social_icon_set == 'none' ){ echo apply_filters( 'wsl_render_auth_widget_alter_provider_name', 'Connect with '.$provider_name ); } else { ?><img alt="<?php echo $provider_name ?>" title="<?php echo sprintf( _wsl__("Connect with %s", 'wordpress-social-login'), $provider_name ) ?>" src="<?php echo $assets_base_url . strtolower( $provider_id ) . '.png' ?>" /><?php } ?>
 
 		</a>
 <?php
@@ -236,6 +236,11 @@ function wsl_render_auth_widget( $args = array() )
 			$no_idp_used = false;
 		}
 	}
+	?>
+	<a rel="nofollow" href="#" title="Sign in with DesignWall account" class="wp-social-login-provider wp-social-login-provider-dw" data-provider="DW">
+			Sign in with DesignWall account
+		</a>
+	<?php
 
 	// no provider enabled?
 	if( $no_idp_used )
